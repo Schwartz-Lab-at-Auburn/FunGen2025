@@ -100,7 +100,7 @@ Enter a name for your job (default: qQualityShortshSCR)
 TSS_quality
 
 Run on; uv, dmc, ivy-bridge, broadwell, etc (default: any)
-asx or just hit enter
+asax or just hit enter
 
 ============================================================
 =====         Summary of your script     job           =====
