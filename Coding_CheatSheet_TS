@@ -72,10 +72,10 @@ vim <scriptname>
 press i to start editing
 when done editing hit Esc and then    :wq or :w and new filename
 
-#Make the script executable, like this
+####  Make the script executable, like this
 chmod +x <myscript>
 
-#Submit the script to the queue on the Alabama Super Computer
+#####    Submit the script to the queue on the Alabama Super Computer
 run_script <myscript>
 
 Choose a batch job queue:
@@ -95,10 +95,12 @@ Enter Queue Name (default <cr>: small) class
 Enter number of processor cores (default <cr>: 1 ) 1
 Enter Time Limit (default <cr>: 2:00:00 HH:MM:SS) 00:30:00
 Enter memory limit (default <cr>: 1gb ) 8gb
+
 Enter a name for your job (default: qQualityShortshSCR)
 TSS_quality
+
 Run on; uv, dmc, ivy-bridge, broadwell, etc (default: any)
-dmc
+asx or just hit enter
 
 ============================================================
 =====         Summary of your script     job           =====
