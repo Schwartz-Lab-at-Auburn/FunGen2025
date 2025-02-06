@@ -7,6 +7,16 @@
 ###		BIOL6850: Functional Genomics, Auburn University
 ###		Purpose: Learn to make a directory (folder) in scratch, move files, assign variables,
 ###			and check error files. There are 4 errors in this file. Can you find them and make it run correctly?
+# For running the script on the Alabama Super Computer.
+##	For more information: https://hpcdocs.asc.edu/content/pbs-queue-system
+## 	After you have this script in your home directory and you have made it executable using  "chmod +x [script name]", 
+## 	then run the script by using "run_script [script name]"
+## 	suggested paramenters are below to submit this script.
+## 		queue: class
+##		core: 1
+##		time limit (HH:MM:SS): 00:20:00 
+##		Memory: 1gb
+##		run on asax
 ##############################################################################################
 
 #source /opt/asn/etc/asn-bash-profiles-special/modules.sh
