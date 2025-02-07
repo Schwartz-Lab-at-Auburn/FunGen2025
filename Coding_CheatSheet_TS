@@ -119,7 +119,7 @@ sbatch -p dmc,uv,knl --qos=class -J TSS_quality --begin=2017-01-
 00:20:00 -N 1-1 -n 1 --mem-per-cpu=1000mb --constraint=uv|dmc
 
 #Check if the script is running
-squeue
+qstat
 
 # Cancel job
 scancel <job ID>
