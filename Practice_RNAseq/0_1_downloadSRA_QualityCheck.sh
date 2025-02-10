@@ -20,7 +20,7 @@
 ##		core: 1
 ##		time limit (HH:MM:SS): 04:00:00 
 ##		Memory: 4gb
-##		run on dmc
+##		run on asax
 ###############################################
 
 
