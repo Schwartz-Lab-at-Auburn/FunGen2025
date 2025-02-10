@@ -17,7 +17,7 @@
         ## After you have this script in your home directory and you have made it executable using  "chmod +x [script name]", 
         ## then run the script by using "run_script [script name]"
         ## suggested paramenters are below to submit this script.
-                ## queue: class  
+                ## queue: medium 
                 ## core: 6
                 ## time limit (HH:MM:SS): 02:00:00  (may need to increase, if so run on medium queue)
                 ## Memory: 12gb
