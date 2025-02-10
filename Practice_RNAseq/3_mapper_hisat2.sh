@@ -2,8 +2,8 @@
  
 ######### FunGen Course Instructions ############
 ## Purpose: The purpose of this script is to 
-##    Use HiSat2 to index your reference genome and then map your cleaned (paired) reads to the indexed reference
-##              First need to use gffread to convert annotation file from .gff3 to .gft formate
+##    Use HiSat2 to index your reference genome and then map your cleaned (paired) reads to the indexed reference. If you have a large genome, this will require a lot more resources then listed here, such as the large queue with 1 core and 120gb. You may want to do the indexing as a seperate script.
+##              First need to use gffread to convert annotation file from .gff3 to .gft format.
 ##              Use Stringtie to count the reads mapped to genes and transcripts, defined in this case by the genome annotation file
 ##              use the python script to take the Stringtie results to make two counts matricies, one at the gene level and one at the transcript level
 ## HiSat2  Indexing   InPut: Reference genome file (.fasta), and annotation file (.gff3) (Optional)
