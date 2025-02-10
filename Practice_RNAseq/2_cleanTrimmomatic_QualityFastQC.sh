@@ -21,7 +21,7 @@
                 ## core: 6
                 ## time limit (HH:MM:SS): 02:00:00  (may need to increase, if so run on medium queue)
                 ## Memory: 12gb
-                ## 
+                ## run on asax
 ###############################################
 
 ## Purpose: The purpose of this script is to trim sequencing adapters and low quality regions from the read data.
