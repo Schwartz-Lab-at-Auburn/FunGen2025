@@ -52,14 +52,14 @@ set -x
   ## Replace the [#] with paths to define these variable
 MyID=aubtss          ## Example: MyID=aubtss
 
-WD=/scratch/$MyID/PracticeRNAseq            ## Example:/scratch/$MyID/PracticeRNAseq  
-CD=/scratch/$MyID/PracticeRNAseq/CleanData            ## Example:/scratch/$MyID/PracticeRNAseq/CleanData   #   *** This is where the cleaned paired files are located from the last script
-REFD=/scratch/$MyID/PracticeRNAseq/DaphniaRefGenome          ## Example:/scratch/$MyID/PracticeRNAseq/DaphniaRefGenome    # this directory contains the indexed reference genome for the garter snake
+WD=/scratch/$MyID/PracticeRNAseq                      ## Example:/scratch/$MyID/PracticeRNAseq  
+CD=/scratch/$MyID/PracticeRNAseq/CleanData             ## Example:/scratch/$MyID/PracticeRNAseq/CleanData   #   *** This is where the cleaned paired files are located from the last script
+REFD=/scratch/$MyID/PracticeRNAseq/DaphniaRefGenome    ## Example:/scratch/$MyID/PracticeRNAseq/DaphniaRefGenome    # this directory contains the indexed reference genome for the garter snake
 MAPD=/scratch/$MyID/PracticeRNAseq/Map_HiSat2           ## Example:/scratch/$MyID/PracticeRNAseq/Map_HiSat2      #
 COUNTSD=/scratch/$MyID/PracticeRNAseq/Counts_StringTie       ## Example:/scratch/$MyID/PracticeRNAseq/Counts_StringTie
-RESULTSD=/home/$MyID/PracticeRNAseq/Counts_H_S_2024      ## Example:/home/aubtss/PracticeRNAseq/Counts_H_S
+RESULTSD=/home/$MyID/PracticeRNAseq/Counts_H_S          ## Example:/home/aubtss/PracticeRNAseq/Counts_H_S
 
-REF=DaphniaPulex_RefGenome_PA42_v3.0                  ## This is what the "easy name" will be for the genome reference
+REF=DaphniaPulex_RefGenome_PA42_v3.0                   ## This is what the "easy name" will be for the genome reference
 
 ## Make the directories and all subdirectories defined by the variables above
 mkdir -p $REFD
