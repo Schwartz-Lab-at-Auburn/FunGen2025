@@ -219,8 +219,8 @@ dim(DGErank_withName)
 #head(DGErankIDs)
 #summary(DGErankIDs)  
 
-#write.csv(as.data.frame(DGErankIDs), file="DGErankIDs.csv", row.names=FALSE)  
-write.table(as.data.frame(DGErank_withName), file="DGErankName.txt", quote=FALSE, row.names=FALSE, sep = "\t")  
+# write the data file as a tab delimited file, with the .rnk file type so it can easily be imported into GSEA
+write.table(as.data.frame(DGErank_withName), file="DGErankName.rnk", quote=FALSE, row.names=FALSE, sep = "\t")  
 
 ####  We also need the normalized expression DATA
 nt <- normTransform(dds) # defaults to log2(x+1)
