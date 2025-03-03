@@ -222,18 +222,40 @@ dim(DGErank_withName)
 # write the data file as a tab delimited file, with the .rnk file type so it can easily be imported into GSEA
 write.table(as.data.frame(DGErank_withName), file="DGErankName.rnk", quote=FALSE, row.names=FALSE, sep = "\t")  
 
-####  We also need the normalized expression DATA
+
+##############  We also need the normalized expression DATA
+## Obtain the transformed normalized count matrix
 nt <- normTransform(dds) # defaults to log2(x+1)
 head(assay(nt))
 # compare to original count data
 head(countdata)
-# make it a new dataframe
+# make the transformed normalized count matrix a new dataframe
 NormTransExp<-assay(nt)
 summary(NormTransExp)
-gene <-gsub("^[^-]+-", "", rownames(NormTransExp))
-NormTransExpIDs  <-cbind(gene,NormTransExp)
-head(NormTransExpIDs)
+head(NormTransExp)
 
+#gene_id <-gsub("^[^-]+-", "", rownames(NormTransExp))
+#NormTransExpIDs  <-cbind(gene_id,NormTransExp)
+#head(NormTransExpIDs)
+
+## Rename first column so it matches "gene_id" in annotation file
+names(NormTransExp)[1]<- "gene_id"
+head(NormTransExp)
+#Merge anno with DGE results
+NormTransExp_Anno <- merge(Anno,NormTransExpIDs,by="gene_id",all.y = FALSE)
+dim(NormTransExp_Anno)
+summary(NormTransExp_Anno)
+head(NormTransExp_Anno)
+
+#remove FunIDs Column
+NormTransExp_Anno = NormTransExp_Anno[,-1]
+head(NormTransExp_Anno)
+
+#subset the results so only the Genes that have a Name remain
+NormTransExp_Anno_withName <- na.omit(NormTransExp_Anno)
+head(NormTransExp_Anno_withName)
+dim(NormTransExp_Anno_withName)
+
+## Write the transformed normalized count matrix with Gene Names to a tab delimited text file that can be imported into Cytoscape
 #write.csv(as.data.frame(NormTransExpIDs), file="NormTransExpressionData.csv", row.names=FALSE)  
-write.table(as.data.frame(NormTransExpIDs), file="NormTransExpIDs.txt", quote=FALSE, row.names=FALSE, sep = "\t")  
-
+write.table(as.data.frame(NormTransExp_Anno_withName), file="NormTransExp_Anno_Names.txt", quote=FALSE, row.names=FALSE, sep = "\t")  
