@@ -234,9 +234,9 @@ NormTransExp<-assay(nt)
 summary(NormTransExp)
 head(NormTransExp)
 
-#gene_id <-gsub("^[^-]+-", "", rownames(NormTransExp))
-#NormTransExpIDs  <-cbind(gene_id,NormTransExp)
-#head(NormTransExpIDs)
+gene_id <-gsub("^[^-]+-", "", rownames(NormTransExp))
+NormTransExpIDs  <-cbind(gene_id,NormTransExp)
+head(NormTransExpIDs)
 
 ## Rename first column so it matches "gene_id" in annotation file
 names(NormTransExp)[1]<- "gene_id"
