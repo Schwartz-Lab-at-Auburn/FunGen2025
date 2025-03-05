@@ -168,6 +168,29 @@ res
   plotPCA(rld, intgroup=c("treatment"))
   
 
+
+############ Preparing Data for GSEA and Cytoscape.  #############
+
+### Merge 'gene names' with DGE results by Gene Model
+
+## Import Annotation file with results from Blast to databases
+Anno <- read.csv("Daphnia_pulex.annotations_Name.csv", stringsAsFactors = FALSE, na.strings=c(""))
+summary(Anno)
+dim(Anno)
+
+## Import the DGE results file make sure the gene model name is 'gene_id' to match annotation file
+DGEresults <- read.csv("DGESeq_results.csv", stringsAsFactors = FALSE)
+summary(DGEresults)
+dim(DGEresults)
+
+## Rename first column so it matches "gene_id" in annotation file
+names(DGEresults)[1]<- "gene_id" 
+
+#Merge anno with DGE results
+DGE_Anno <- merge(Anno,DGEresults,by="gene_id",all.y = FALSE)
+dim(DGE_Anno)
+summary(DGE_Anno)
+
   
 
 ############################# Make ranked list for GSEA ####################
