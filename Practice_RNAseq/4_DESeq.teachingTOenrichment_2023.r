@@ -169,93 +169,76 @@ res
   
 
   
-############ Preparing Data for GSEA and Cytoscape.  #############
-  
-### Merge 'gene names' with DGE results by Gene Model
-  
-## Import Annotation file with results from Blast to databases
-Anno <- read.csv("Daphnia_pulex.annotations_Name.csv", stringsAsFactors = FALSE, na.strings=c(""))
-summary(Anno)
-dim(Anno)
-  
-## Import the DGE results file make sure the gene model name is 'gene_id' to match annotation file
-DGEresults <- read.csv("DGESeq_results.csv", stringsAsFactors = FALSE)
-summary(DGEresults)
-dim(DGEresults)
-
-## Rename first column so it matches "gene_id" in annotation file
-names(DGEresults)[1]<- "gene_id" 
-
-#Merge anno with DGE results
-DGE_Anno <- merge(Anno,DGEresults,by="gene_id",all.y = FALSE)
-dim(DGE_Anno)
-summary(DGE_Anno)
-
 
 ############################# Make ranked list for GSEA ####################
-   ## example aa <- within(resOrdered, z <- x + y - 2)
+## example aa <- within(resOrdered, z <- x + y - 2)
 DGE_Anno_Rank <-  within(DGE_Anno, rank <- sign(log2FoldChange) * -log10(pvalue))
 DGE_Anno_Rank 
- 
- #subset the results so only Gene Name and rank
+
+#subset the results so only Gene Name and rank
 DGErank = subset(DGE_Anno_Rank, select = c(Name,rank) )
 DGErank
 
-#sebset the results so only Gene Name and rank
+#subset the results so only Gene Name and rank
 DGErank_withName <- na.omit(DGErank)
 DGErank_withName
 dim(DGErank_withName)
 
 
- 
+
 ### IF NEEDED....remove the "gene-" from row names
-  ## https://stackoverflow.com/questions/39897155/replace-and-remove-part-of-string-in-rownames/39897315  "URS000075AF9C-snoRNA_GTATGTGTGGACAGCACTGAGACTGAGTCT"    to   "snoRNA"
-  ## We can use gsub to match one of more characters that are not a - ([^-]+) from the start (^) of the string followed by 
-  ## a - or (|) one or more characters that are not an underscore ([^_]+) until the end of the string ($)  and replace it with blanks ("").
-  ## gsub("^[^-]+-|_[^_]+$", "", rownames(df))
+## https://stackoverflow.com/questions/39897155/replace-and-remove-part-of-string-in-rownames/39897315  "URS000075AF9C-snoRNA_GTATGTGTGGACAGCACTGAGACTGAGTCT"    to   "snoRNA"
+## We can use gsub to match one of more characters that are not a - ([^-]+) from the start (^) of the string followed by 
+## a - or (|) one or more characters that are not an underscore ([^_]+) until the end of the string ($)  and replace it with blanks ("").
+## gsub("^[^-]+-|_[^_]+$", "", rownames(df))
 
 #gene <-gsub("^[^-]+-", "", rownames(DGErank))
 #DGErankIDs  <-cbind(gene,DGErank)
 #head(DGErankIDs)
 #summary(DGErankIDs)  
 
-# write the data file as a tab delimited file, with the .rnk file type so it can easily be imported into GSEA
+#write.csv(as.data.frame(DGErankIDs), file="DGErankIDs.csv", row.names=FALSE)  
 write.table(as.data.frame(DGErank_withName), file="DGErankName.rnk", quote=FALSE, row.names=FALSE, sep = "\t")  
 
-
-##############  We also need the normalized expression DATA
-## Obtain the transformed normalized count matrix
+####  We also need the normalized expression DATA
 nt <- normTransform(dds) # defaults to log2(x+1)
 head(assay(nt))
 # compare to original count data
 head(countdata)
-# make the transformed normalized count matrix a new dataframe
+# make it a new dataframe
 NormTransExp<-assay(nt)
 summary(NormTransExp)
 head(NormTransExp)
 
-gene_id <-gsub("^[^-]+-", "", rownames(NormTransExp))
+## Rename first column so it matches "gene_id" in annotation file
+#gene_id <-gsub("^[^-]+-", "", rownames(NormTransExp))
 NormTransExpIDs  <-cbind(gene_id,NormTransExp)
 head(NormTransExpIDs)
 
 ## Rename first column so it matches "gene_id" in annotation file
-names(NormTransExp)[1]<- "gene_id"
-head(NormTransExp)
+#names(NormTransExp)[1]<- "gene_id"
+#head(NormTransExp)
+
 #Merge anno with DGE results
 NormTransExp_Anno <- merge(Anno,NormTransExpIDs,by="gene_id",all.y = FALSE)
 dim(NormTransExp_Anno)
 summary(NormTransExp_Anno)
 head(NormTransExp_Anno)
 
-#remove FunIDs Column
-NormTransExp_Anno = NormTransExp_Anno[,-1]
+#remove FunIDs
+#NormTransExp_Anno = NormTransExp_Anno[,-1]
+# Move the FunIDs to column 2
+
+## Swap column 1 and column 2
+cols <- colnames(NormTransExp_Anno)  # get all column names
+cols[c(1, 2)] <- cols[c(2, 1)]  # Swap column names
+NormTransExp_Anno <- NormTransExp_Anno[, cols]  # Reorder the dataframe based on the new column order
 head(NormTransExp_Anno)
 
-#subset the results so only the Genes that have a Name remain
+#subset the results so only Genes with Name
 NormTransExp_Anno_withName <- na.omit(NormTransExp_Anno)
 head(NormTransExp_Anno_withName)
 dim(NormTransExp_Anno_withName)
 
-## Write the transformed normalized count matrix with Gene Names to a tab delimited text file that can be imported into Cytoscape
 #write.csv(as.data.frame(NormTransExpIDs), file="NormTransExpressionData.csv", row.names=FALSE)  
 write.table(as.data.frame(NormTransExp_Anno_withName), file="NormTransExp_Anno_Names.txt", quote=FALSE, row.names=FALSE, sep = "\t")  
