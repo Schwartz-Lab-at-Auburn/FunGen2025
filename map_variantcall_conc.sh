@@ -113,10 +113,10 @@ do
 
 ##############  Calling SNPs  #######################
    #Call SNPs
-bcftools mpileup -f reference_genome.fa "$i"_sorted.bam | bcftools call -mv -Ov -o "$i"_variants.vcf
+bcftools mpileup -f ${REF}.fasta "$i"_sorted_mapOnly.bam | bcftools call -mv -Ov -o "$i"_variants.vcf
 
  #Generate the consensus sequence
-bcftools consensus -f reference_genome.fa -o "$i"_IISconsensus.fasta "$i"_variants.vcf
+bcftools consensus -f ${REF}.fasta -o "$i"_IISconsensus.fasta "$i"_variants.vcf
 
 done<list
 
@@ -126,4 +126,4 @@ done<list
 cp *_variants.vcf ${RESULTSD}
 
 ### copy the final results files (the count matricies that are .cvs) to your home directory. 
-cp *_consensus.fasta ${RESULTSD}
+cp *consensus.fasta ${RESULTSD}
