@@ -54,14 +54,6 @@ RESULTSD=/home/$MyID/PracticeRNAseq_Full/Counts_H_S_2024      ## Example:/home/a
 REF=IIS_CDS                 ## This is what the "easy name" will be for the genome reference
 VAR=$WD/Variants
 
-
-##  make the directories in SCRATCH for holding the raw data 
-## -p tells it to make any upper level directories that are not there.
-mkdir -p ${WD}
-mkdir -p ${DD}
-## move to the Data Directory
-cd ${DD}
-
 ############################***********  Mapping and Calling SNPs ************##########################
 
 ## Make the directories and all subdirectories defined by the variables above
