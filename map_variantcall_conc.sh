@@ -54,13 +54,13 @@ RESULTSD=/home/$MyID/PracticeRNAseq_Full/Counts_H_S_2024      ## Example:/home/a
 REF=IIS_CDS                 ## This is what the "easy name" will be for the genome reference
 VAR=$WD/Variants
 
-############################***********  Mapping and Calling SNPs ************##########################
-
 ## Make the directories and all subdirectories defined by the variables above
 mkdir -p $REFD
 mkdir -p $MAPD
 mkdir -p $VAR
 mkdir -p $RESULTSD
+
+############################***********  Mapping and Calling SNPs ************##########################
 
 ##################  Prepare the Reference Index for mapping with HiSat2   #############################
 cd $REFD
