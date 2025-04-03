@@ -115,14 +115,16 @@ do
     ### Index the BAM and get mapping statistics, and put them in a text file for us to look at.
   samtools flagstat   "$i"_sorted.bam   > "$i"_Stats.txt
 
+  	## remove unmapped reads
+  samtools view -F 0x04 -b "$i"_sorted.bam > "$i"_sorted_mapOnly.bam
+
 
 ##############  Calling SNPs  #######################
    #Call SNPs
 bcftools mpileup -f reference_genome.fa "$i"_sorted.bam | bcftools call -mv -Ov -o "$i"_variants.vcf
 
  #Generate the consensus sequence
-bcftools consensus -f reference_genome.fa -o "$i"_consensus.fasta "$i"_variants.vcf
-
+bcftools consensus -f reference_genome.fa -o "$i"_IISconsensus.fasta "$i"_variants.vcf
 
 done<list
 
